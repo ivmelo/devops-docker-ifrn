@@ -76,7 +76,7 @@ Para o Jenkins, nós utilizamos a [documentação encontrada no Docker Hub](http
 O comando utilizado para baixar e iniciar a máquina virtual foi:
 
 ```
-docker run --detach -p 8080:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home jenkins
+docker run --detach --name jenkins -p 80:8080 -p 50000:50000 jenkins
 ```
 
 Como explicado anteriormente, o comando ```--detach``` libera o terminal, o ```-p``` associa uma porta do container a uma porta da máquina host. Já o ```jenkins``` no final diz qual imagem será usada, e o -v diz em qual diretório local será armazanado os dados da aplicação.
@@ -125,3 +125,14 @@ Como dito anteriormente, após isso, durante a primeira execução, o gitlab vai
 Um arquivo chamado ```update_gitlab.sh``` pode ser encontrado neste repositório.
 
 #### Jenkins
+
+Para atualizar o Jenkins, uma estratégia similar a do gitlab pode ser usada. Como todos os dados utilizados pela aplicação estão dentro de uma única pasta, você pode copiar os dados e em seguida executar ```docker pull``` novamente. Após isso, você pode iniciar o docker com -v apontando para o diretório no qual os dados são salvos e tudo funcionará como antes.
+
+```
+docker stop jenkins
+docker rm jenkins
+docker pull jenkins
+docker run --detach -p 80:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home jenkins
+```
+
+O script ```update_jenkins.sh``` foi criado no repositório para ser utilizado durante esta rotina.
