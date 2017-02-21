@@ -69,6 +69,8 @@ Feito isso, foi acessado a URL [http://gitlab.ivmelo.com](http://gitlab.ivmelo.c
 
 **IMPORTANTE:** Para que seja possível acessar o gitlab por SSH, a porta 22 precisa estar liberada na máquina host. Logo, antes de instalar o container do docker, nós configuramos o acesso SSH na máquina host para usar a porta 220 em vez da 22.
 
+![gitlab-example](http://i.imgur.com/Sj8WAAK.png)
+
 ### Instalação do Jenkins.
 
 Para o Jenkins, nós utilizamos a [documentação encontrada no Docker Hub](https://hub.docker.com/_/jenkins/) como referência.
@@ -82,6 +84,8 @@ docker run --detach --name jenkins -p 80:8080 -p 50000:50000 jenkins
 Como explicado anteriormente, o comando ```--detach``` libera o terminal, o ```-p``` associa uma porta do container a uma porta da máquina host. Já o ```jenkins``` no final diz qual imagem será usada, e o -v diz em qual diretório local será armazanado os dados da aplicação.
 
 Depois de executar o comando acima, acessamos a url [http://jenkins.ivmelo.com](http://jenkins.ivmelo.com) para continuar a instalação do Jenkins e instalar os plugins necessários para fazer os builds do maven.
+
+![jenkins-example](http://i.imgur.com/oCZX6XF.png)
 
 ### Estratégia de atualização das aplicações.
 
@@ -97,17 +101,17 @@ Sendo assim, a atualização do gitlab se dá em uma série de 4 comandos simple
 sudo docker stop gitlab
 ```
 
-2. Remover o container.
+1. Remover o container.
 ```
 sudo docker rm gitlab
 ```
 
-3. Baixar a versão mais recente do gitlab.
+1. Baixar a versão mais recente do gitlab.
 ```
 sudo docker pull gitlab/gitlab-ce:latest
 ```
 
-4. Criar o container novamente, usando as opções previamente definidas.
+1. Criar o container novamente, usando as opções previamente definidas.
 ```
 sudo docker run --detach \
     --hostname gitlab.ivmelo.com \
