@@ -140,3 +140,18 @@ docker run --detach -p 80:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home 
 ```
 
 O script ```update_jenkins.sh``` foi criado no repositório para ser utilizado durante esta rotina.
+
+#### Periodicidade de atualização.
+- Gitlab: a cada 2 semanas.
+- Jenkins: a cada 3 meses.
+
+O gitlab está constantemente lançando novas versões, por isso, recomendamos atualizar a cada duas semansas. Desta forma podemos garantir que a aplicação mais recente estará instalada no servidor.
+
+Já o Jenkins, possui uma versão LTS que é lançada a cada 12 semanas. Por isso, deve ser atualizado a cada três meses.
+
+Para automatizar a atualização, os scripts ```update_gitlab.sh``` e ```update_jenkins.sh```, inclusos neste repositório, podem ser adicionados ao [CRON](https://en.wikipedia.org/wiki/Cron) da máquina host para que sejam executados automaticamente de tempos em tempos, conforme determinado.
+
+### Usando o docker no Jenkins.
+Instalar o docker dentro de um container docker pode levar a alguns problemas indesejados. O guia a seguir mostra alternativas que solucionam este problema:
+
+[https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
